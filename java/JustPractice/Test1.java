@@ -24,16 +24,20 @@ public class Test1 {
 private static final String dependsOnMethod = null;
 WebDriver driver;
 	
+	@Parameters("browser")
+    @BeforeMethod
+	public void main(String browser) throws IOException {
 	
-   // @BeforeMethod
-	public void main() throws IOException {
-		FileInputStream reads=new FileInputStream("C:\\Users\\SHIV\\eclipse-workspace\\Practice\\Data.properties");
+		/*FileInputStream reads=new FileInputStream("C:\\Users\\SHIV\\eclipse-workspace\\Practice\\Data.properties");
 		Properties reader=new Properties();
 		reader.load(reads);
 		
 		
 		String name=reader.getProperty("browser");
 	System.out.println(name);
+	*/
+		String name=browser;
+		
 	if(name.equals("Firefox"))
 	{
 			System.setProperty("webdriver.gecko.driver","C:\\Selenium Project\\geckodriver.exe");
@@ -42,7 +46,10 @@ WebDriver driver;
 	}	
 	else
 	{
-		System.out.println("wrong");
+
+		System.setProperty("webdriver.chrome.driver","C:\\Selenium Project\\chromedriver.exe");
+	     driver=new ChromeDriver();
+	    driver.get("https://www.google.com/");
 	}
 	
     }
